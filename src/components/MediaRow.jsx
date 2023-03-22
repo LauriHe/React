@@ -5,7 +5,7 @@ const MediaRow = ({file}) => {
   return (
     <tr>
       <td>
-        <img src={mediaUrl + file.thumbnails.w160} alt={file.title} />
+        <img src={mediaUrl + file.thumbnails.w160} alt="Title" />
       </td>
       <td>
         <h3>{file.title}</h3>

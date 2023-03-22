@@ -1,3 +1,3 @@
-# Week 1: http-b
+# Week 1: custom-hooks
 
-Open [https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week1/http-b/](https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week1/http-b/) to view it in the browser.
+Open [https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week1/custom-hooks/](https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week1/custom-hooks/) to view it in the browser.

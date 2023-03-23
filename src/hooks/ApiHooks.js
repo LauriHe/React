@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
-import {baseUrl} from '../src/utils/variables';
+import {useState, useEffect} from 'react';
+import {baseUrl} from '../utils/variables';
 
-const doFetch = async (url) => {
-  const response = await fetch(url);
+const doFetch = async (url, options) => {
+  const response = await fetch(url, options);
   const json = await response.json();
   if (!response.ok) {
     const message = json.error
@@ -14,19 +14,18 @@ const doFetch = async (url) => {
 };
 
 const useMedia = () => {
-  const [mediaArray, setMeadiaArray] = useState([]);
+  const [mediaArray, setMediaArray] = useState([]);
   const getMedia = async () => {
     try {
       const files = await doFetch(baseUrl + 'media');
       const filesWithThumbnail = await Promise.all(
         files.map(async (file) => {
-          const response = await fetch(baseUrl + 'media/' + file.file_id);
-          return await response.json();
+          return await doFetch(baseUrl + 'media/' + file.file_id);
         })
       );
-      setMeadiaArray(filesWithThumbnail);
+      setMediaArray(filesWithThumbnail);
     } catch (error) {
-      console.log('getMedia' + error.message);
+      console.error('getMedia', error.message);
     }
   };
 

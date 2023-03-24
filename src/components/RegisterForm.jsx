@@ -1,7 +1,9 @@
-import PropTypes from 'prop-types';
 import useForm from '../hooks/FormHooks';
+import {useUser} from '../hooks/ApiHooks';
 
 const RegisterForm = (props) => {
+  const {postUser, getCheckUser} = useUser();
+
   const initValues = {
     username: '',
     password: '',
@@ -9,8 +11,18 @@ const RegisterForm = (props) => {
     full_name: '',
   };
 
-  const doRegister = () => {
-    console.log('submitted', inputs);
+  const doRegister = async () => {
+    try {
+      const result = await postUser(inputs);
+      console.log('doRegister ~ result:', result);
+    } catch (error) {
+      alert('doRegister ~ error:', error);
+    }
+  };
+
+  const handleUsername = async () => {
+    const available = await getCheckUser(inputs.username);
+    available.available || alert('Username not available');
   };
 
   const {inputs, handleSubmit, handleInputChange} = useForm(
@@ -25,23 +37,28 @@ const RegisterForm = (props) => {
           name="username"
           placeholder="Username"
           onChange={handleInputChange}
+          value={inputs.username}
+          onBlur={handleUsername}
         />
         <input
           name="password"
           type="password"
           placeholder="Password"
           onChange={handleInputChange}
+          value={inputs.password}
         />
         <input
           name="email"
           type="email"
           placeholder="Email"
           onChange={handleInputChange}
+          value={inputs.email}
         />
         <input
           name="full_name"
           placeholder="Full name"
           onChange={handleInputChange}
+          value={inputs.full_name}
         />
         <button type="submit">Register</button>
       </form>

@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types';
-import {useEffect, useState} from 'react';
+import {ImageList} from '@mui/material';
 import {useMedia} from '../hooks/apiHooks';
-import {baseUrl} from '../utils/variables';
 import MediaRow from './MediaRow';
 
 const MediaTable = () => {
   const {mediaArray} = useMedia();
 
   return (
-    <table>
-      <tbody>
-        {mediaArray.map((item, index) => {
-          return <MediaRow key={index} file={item} />;
-        })}
-      </tbody>
-    </table>
+    <ImageList variant="masonry" cols={3} gap={25}>
+      {mediaArray.map((item, index) => {
+        return <MediaRow key={index} file={item} />;
+      })}
+    </ImageList>
   );
 };
 

@@ -8,8 +8,6 @@ const Layout = () => {
   const {getUserByToken} = useUser();
   const navigate = useNavigate();
 
-  console.log(user, setUser);
-
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {

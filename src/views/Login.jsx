@@ -1,3 +1,4 @@
+import {Grid} from '@mui/material';
 import {useState} from 'react';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
@@ -9,11 +10,15 @@ const Login = (props) => {
   };
 
   return (
-    <>
-      {formToggle ? <LoginForm /> : <RegisterForm />}
-      <p>{formToggle ? 'First time here?' : 'or'}</p>
-      <button onClick={toggle}>{formToggle ? 'Register' : 'Login'}</button>
-    </>
+    <Grid container direction="column" alignItems="center">
+      <Grid item>{formToggle ? <LoginForm /> : <RegisterForm />}</Grid>
+      <Grid item>
+        <p>{formToggle ? 'First time here?' : 'or'}</p>
+      </Grid>
+      <Grid item>
+        <button onClick={toggle}>{formToggle ? 'Register' : 'Login'}</button>
+      </Grid>
+    </Grid>
   );
 };
 

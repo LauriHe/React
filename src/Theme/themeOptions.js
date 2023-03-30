@@ -8,6 +8,9 @@ const themeOptions = {
   body2: {
     fontFamily: 'Hind',
   },
+  button: {
+    fontFamily: 'Hind',
+  },
   palette: {
     mode: 'dark',
   },

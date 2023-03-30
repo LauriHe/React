@@ -1,8 +1,11 @@
+import {useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {MediaContext} from '../contexts/mediaContext';
 import {useAuth} from '../hooks/ApiHooks';
 import useForm from '../hooks/FormHooks';
 
 const LoginForm = (props) => {
+  const {setUser} = useContext(MediaContext);
   const {postLogin} = useAuth();
   const navigate = useNavigate();
 
@@ -16,6 +19,7 @@ const LoginForm = (props) => {
       const result = await postLogin(inputs);
       console.log('doLogin ~ result:', result);
       localStorage.setItem('userToken', result.token);
+      setUser(result.user);
       navigate('/home');
     } catch (error) {
       console.error('doLogin ~ error:', error.message);

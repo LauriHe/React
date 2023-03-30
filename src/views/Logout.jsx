@@ -1,5 +1,14 @@
-const Logout = (props) => {
-  return <div>Logout</div>;
+import {useContext, useEffect} from 'react';
+import {Navigate} from 'react-router-dom';
+import {MediaContext} from '../contexts/mediaContext';
+
+const Logout = () => {
+  const {setUser} = useContext(MediaContext);
+  useEffect(() => {
+    setUser(null);
+    localStorage.removeItem('userToken');
+  }, []);
+  return <Navigate to="/" />;
 };
 
 Logout.propTypes = {};

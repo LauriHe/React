@@ -1,16 +1,21 @@
-import {useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import {useUser} from '../hooks/ApiHooks';
 import {Link, Outlet, useNavigate} from 'react-router-dom';
+import {MediaContext} from '../contexts/mediaContext';
 
 const Layout = () => {
+  const {user, setUser} = useContext(MediaContext);
   const {getUserByToken} = useUser();
   const navigate = useNavigate();
+
+  console.log(user, setUser);
 
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
-      const user = await getUserByToken(userToken);
-      if (user) {
+      const userData = await getUserByToken(userToken);
+      if (userData) {
+        setUser(userData);
         navigate('/home');
         return;
       }
@@ -29,9 +34,20 @@ const Layout = () => {
           <li>
             <Link to="/home">Home</Link>
           </li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
+          {user ? (
+            <>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/logout">Logout</Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/">Login</Link>
+            </li>
+          )}
         </ul>
       </nav>
       <main>

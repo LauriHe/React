@@ -1,4 +1,3 @@
-import {AccountCircle, Badge, ContactMail} from '@mui/icons-material';
 import {
   Avatar,
   Card,
@@ -6,12 +5,11 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemIcon,
   ListItemText,
 } from '@mui/material';
 import {useContext, useEffect, useState} from 'react';
 import {MediaContext} from '../contexts/MediaContext';
-import {useTag} from '../hooks/apiHooks';
+import {useTag} from '../hooks/ApiHooks';
 import {mediaUrl} from '../utils/variables';
 
 const Profile = () => {
@@ -56,27 +54,18 @@ const Profile = () => {
               </ListItemAvatar>
             </ListItem>
             <ListItem>
-              <ListItemIcon>
-                <AccountCircle />
-              </ListItemIcon>
               <ListItemText primary={user.username} />
             </ListItem>
             <ListItem>
-              <ListItemIcon>
-                <ContactMail />
-              </ListItemIcon>
+              {' '}
               <ListItemText primary={user.email} />
             </ListItem>
             <ListItem>
-              <ListItemIcon>
-                <Badge />
-              </ListItemIcon>
+              {' '}
               <ListItemText primary={user.full_name} />
             </ListItem>
             <ListItem>
-              <ListItemIcon>
-                <Badge />
-              </ListItemIcon>
+              {' '}
               <ListItemText primary={user.user_id} />
             </ListItem>
           </List>

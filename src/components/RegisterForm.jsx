@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
 import useForm from '../hooks/FormHooks';
 import {useUser} from '../hooks/ApiHooks';
-import {Box, Button, Grid, TextField} from '@mui/material';
+import {Button} from '@mui/material';
 import {Container} from '@mui/system';
+import {TextValidator, ValidatorForm} from 'react-material-ui-form-validator';
+import {registerForm} from '../utils/errorMessages';
+import {registerValidator} from '../utils/validators';
 
 const RegisterForm = (props) => {
   const {postUser, getCheckUser} = useUser();
@@ -35,16 +37,17 @@ const RegisterForm = (props) => {
 
   return (
     <Container maxWidth="xs">
-      <Box component="form" onSubmit={handleSubmit}>
-        <TextField
+      <ValidatorForm onSubmit={handleSubmit} noValidate>
+        <TextValidator
           fullWidth
           margin="dense"
           name="username"
           label="Username"
           onChange={handleInputChange}
           value={inputs.username}
+          onBlur={handleUsername}
         />
-        <TextField
+        <TextValidator
           fullWidth
           margin="dense"
           name="password"
@@ -53,7 +56,7 @@ const RegisterForm = (props) => {
           onChange={handleInputChange}
           value={inputs.password}
         />
-        <TextField
+        <TextValidator
           fullWidth
           margin="dense"
           name="email"
@@ -61,8 +64,10 @@ const RegisterForm = (props) => {
           label="Email"
           onChange={handleInputChange}
           value={inputs.email}
+          validators={registerValidator.email}
+          errorMessages={registerForm.email}
         />
-        <TextField
+        <TextValidator
           fullWidth
           margin="dense"
           name="full_name"
@@ -73,7 +78,7 @@ const RegisterForm = (props) => {
         <Button fullWidth sx={{mt: 1}} variant="contained" type="submit">
           Register
         </Button>
-      </Box>
+      </ValidatorForm>
     </Container>
   );
 };

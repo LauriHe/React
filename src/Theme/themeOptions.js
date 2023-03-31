@@ -1,19 +1,19 @@
+import '@fontsource/montserrat';
+import '@fontsource/hind';
+
 const themeOptions = {
   typography: {
-    fontFamily: 'Montserrat',
-  },
-  body1: {
-    fontFamily: 'Hind',
-  },
-  body2: {
-    fontFamily: 'Hind',
-  },
-  button: {
-    fontFamily: 'Hind',
-  },
-  palette: {
-    mode: 'dark',
+    fontFamily: 'hind',
+    h1: {
+      fontFamily: 'montserrat',
+    },
+    h2: {
+      fontFamily: 'montserrat',
+    },
+    h3: {
+      fontFamily: 'montserrat',
+    },
   },
 };
 
-export default themeOptions;
+export {themeOptions};

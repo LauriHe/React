@@ -5,7 +5,7 @@ import Layout from './views/Layout';
 import Single from './views/Single';
 import Profile from './views/Profile';
 import Login from './views/Login';
-import {MediaProvider} from './contexts/mediaContext';
+import {MediaProvider} from './contexts/MediaContext';
 import Logout from './views/Logout';
 
 console.log('base', import.meta.env.BASE_URL);

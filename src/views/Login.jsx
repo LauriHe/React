@@ -1,4 +1,5 @@
 import {Button, Grid, Typography} from '@mui/material';
+import PropTypes from 'prop-types';
 import {useState} from 'react';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
@@ -8,17 +9,18 @@ const Login = (props) => {
   const toggle = () => {
     setFormToggle(!formToggle);
   };
-
   return (
     <Grid container direction="column" alignItems="center">
       <Grid item>
         <Typography component="h1" variant="h3">
-          Login / Register
+          {formToggle ? 'Login' : 'Register'}
         </Typography>
       </Grid>
       <Grid item>{formToggle ? <LoginForm /> : <RegisterForm />}</Grid>
       <Grid item>
-        <p>{formToggle ? 'First time here?' : 'or'}</p>
+        <Typography variant="body2" sx={{mt: 2}}>
+          {formToggle ? 'First time here?' : 'Already registered?'}
+        </Typography>
       </Grid>
       <Grid item>
         <Button onClick={toggle}>{formToggle ? 'Register' : 'Login'}</Button>

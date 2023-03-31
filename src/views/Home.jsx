@@ -4,7 +4,7 @@ import MediaTable from '../components/MediaTable';
 const Home = () => {
   return (
     <>
-      <Typography component="h1" variant="h2">
+      <Typography component="h1" variant="h3">
         Home
       </Typography>
       <MediaTable />

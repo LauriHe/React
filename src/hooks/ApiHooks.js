@@ -33,7 +33,7 @@ const useMedia = () => {
     try {
       getMedia();
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   }, []);
 
@@ -49,7 +49,7 @@ const useUser = () => {
       },
       body: JSON.stringify(inputs),
     };
-    return await doFetch(baseUrl + 'users/', options);
+    return await doFetch(baseUrl + 'users', options);
   };
 
   const getUserByToken = async (token) => {
@@ -69,7 +69,7 @@ const useUser = () => {
   return {postUser, getUserByToken, getCheckUser};
 };
 
-const useAuth = () => {
+const useAuthentication = () => {
   const postLogin = async (inputs) => {
     const options = {
       method: 'POST',
@@ -78,9 +78,34 @@ const useAuth = () => {
       },
       body: JSON.stringify(inputs),
     };
-    return await doFetch(baseUrl + 'login/', options);
+    return await doFetch(baseUrl + 'login', options);
   };
   return {postLogin};
 };
 
-export {useMedia, useUser, useAuth};
+const useTag = () => {
+  const getTag = async (tag) => {
+    const tagResult = await doFetch(baseUrl + 'tags/' + tag);
+    if (tagResult.length > 0) {
+      return tagResult;
+    } else {
+      throw new Error('Tag not found');
+    }
+  };
+
+  const postTag = async (data, token) => {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    return await doFetch(baseUrl + 'tags', fetchOptions);
+  };
+
+  return {getTag, postTag};
+};
+
+export {useMedia, useUser, useAuthentication, useTag};

@@ -1,22 +1,35 @@
+import {
+  AppBar,
+  Container,
+  createTheme,
+  ThemeProvider,
+  Toolbar,
+  Box,
+  Button,
+  CssBaseline,
+  Typography,
+} from '@mui/material';
 import {useContext, useEffect} from 'react';
-import {useUser} from '../hooks/ApiHooks';
-import {Link, Outlet, useNavigate} from 'react-router-dom';
-import {MediaContext} from '../contexts/mediaContext';
-import {createTheme, ThemeProvider} from '@mui/material';
-import themeOptions from '../Theme/themeOptions';
+import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
+import {useUser} from '../hooks/apiHooks';
+import {themeOptions} from '../theme/themeOptions';
 
 const Layout = () => {
   const {user, setUser} = useContext(MediaContext);
   const {getUserByToken} = useUser();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
+      console.log(userToken);
       const userData = await getUserByToken(userToken);
       if (userData) {
         setUser(userData);
-        navigate('/home');
+        const target = location.pathname === '/' ? '/home' : location.pathname;
+        navigate(target);
         return;
       }
     }
@@ -31,32 +44,44 @@ const Layout = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
-            {user ? (
-              <>
-                <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                  <Link to="/logout">Logout</Link>
-                </li>
-              </>
-            ) : (
-              <li>
-                <Link to="/">Login</Link>
-              </li>
-            )}
-          </ul>
-        </nav>
+      <CssBaseline />
+      <Container maxWidth="xl">
+        <AppBar position="sticky">
+          <Toolbar disableGutters sx={{justifyContent: 'space-between'}}>
+            <Typography
+              variant="h6"
+              sx={{
+                m: 2,
+                letterSpacing: '.3rem',
+              }}
+            >
+              FIRMA
+            </Typography>
+            <Box sx={{mr: 2}}>
+              <Button sx={{color: 'white'}} component={Link} to="/home">
+                Home
+              </Button>
+              {user ? (
+                <>
+                  <Button sx={{color: 'white'}} component={Link} to="/profile">
+                    Profile
+                  </Button>
+                  <Button sx={{color: 'white'}} component={Link} to="/logout">
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Button sx={{color: 'white'}} component={Link} to="/">
+                  Login
+                </Button>
+              )}
+            </Box>
+          </Toolbar>
+        </AppBar>
         <main>
           <Outlet />
         </main>
-      </div>
+      </Container>
     </ThemeProvider>
   );
 };

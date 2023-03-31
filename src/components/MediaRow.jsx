@@ -5,27 +5,23 @@ import {mediaUrl} from '../utils/variables';
 
 const MediaRow = ({file}) => {
   return (
-    <>
-      <ImageListItem>
-        <img src={mediaUrl + file.thumbnails.w640} alt={file.title} />
-        <ImageListItemBar
-          sx={{mt: 1}}
-          position="below"
-          title={file.title}
-          subtitle={file.description}
-          actionIcon={
-            <Button
-              component={Link}
-              variant="contained"
-              to="/single"
-              state={{file}}
-            >
-              View
-            </Button>
-          }
-        />
-      </ImageListItem>
-    </>
+    <ImageListItem>
+      <img src={mediaUrl + file.thumbnails.w640} alt={file.title} />
+      <ImageListItemBar
+        title={file.title}
+        subtitle={file.description}
+        actionIcon={
+          <Button
+            component={Link}
+            variant="contained"
+            to="/single"
+            state={{file}}
+          >
+            View
+          </Button>
+        }
+      />
+    </ImageListItem>
   );
 };
 

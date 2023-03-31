@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import useForm from '../hooks/FormHooks';
 import {useUser} from '../hooks/ApiHooks';
-import {Button, TextField} from '@mui/material';
+import {Box, Button, Grid, TextField} from '@mui/material';
+import {Container} from '@mui/system';
 
 const RegisterForm = (props) => {
   const {postUser, getCheckUser} = useUser();
@@ -14,16 +16,16 @@ const RegisterForm = (props) => {
 
   const doRegister = async () => {
     try {
-      const result = await postUser(inputs);
-      console.log('doRegister ~ result:', result);
+      const userResult = await postUser(inputs);
+      alert(userResult.message);
     } catch (error) {
-      alert('doRegister ~ error:', error);
+      alert(error.message);
     }
   };
 
   const handleUsername = async () => {
-    const available = await getCheckUser(inputs.username);
-    available.available || alert('Username not available');
+    const {available} = await getCheckUser(inputs.username);
+    available || alert('Username not available');
   };
 
   const {inputs, handleSubmit, handleInputChange} = useForm(
@@ -32,48 +34,47 @@ const RegisterForm = (props) => {
   );
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <Container maxWidth="xs">
+      <Box component="form" onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          margin="normal"
+          margin="dense"
           name="username"
-          placeholder="Username"
+          label="Username"
           onChange={handleInputChange}
           value={inputs.username}
-          onBlur={handleUsername}
         />
         <TextField
           fullWidth
-          margin="normal"
+          margin="dense"
           name="password"
           type="password"
-          placeholder="Password"
+          label="Password"
           onChange={handleInputChange}
           value={inputs.password}
         />
         <TextField
           fullWidth
-          margin="normal"
+          margin="dense"
           name="email"
           type="email"
-          placeholder="Email"
+          label="Email"
           onChange={handleInputChange}
           value={inputs.email}
         />
         <TextField
           fullWidth
-          margin="normal"
+          margin="dense"
           name="full_name"
-          placeholder="Full name"
+          label="Full name"
           onChange={handleInputChange}
           value={inputs.full_name}
         />
-        <Button fullWidth sx={{mt: 2}} variant="contained" type="submit">
+        <Button fullWidth sx={{mt: 1}} variant="contained" type="submit">
           Register
         </Button>
-      </form>
-    </>
+      </Box>
+    </Container>
   );
 };
 

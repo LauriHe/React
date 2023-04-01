@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import useForm from '../hooks/FormHooks';
 import {useUser} from '../hooks/ApiHooks';
-import {Box, Button, Grid, TextField} from '@mui/material';
+import {Box, Button, TextField} from '@mui/material';
 import {Container} from '@mui/system';
 
 const RegisterForm = (props) => {
@@ -43,6 +42,7 @@ const RegisterForm = (props) => {
           label="Username"
           onChange={handleInputChange}
           value={inputs.username}
+          onBlur={handleUsername}
         />
         <TextField
           fullWidth

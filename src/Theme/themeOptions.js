@@ -14,6 +14,9 @@ const themeOptions = {
       fontFamily: 'montserrat',
     },
   },
+  palette: {
+    mode: 'dark',
+  },
 };
 
 export {themeOptions};

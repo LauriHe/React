@@ -2,6 +2,7 @@ import {
   Avatar,
   Card,
   CardContent,
+  Grid,
   List,
   ListItem,
   ListItemAvatar,
@@ -37,41 +38,45 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <Card>
-      {user && (
-        <CardContent>
-          <List>
-            <ListItem>
-              <ListItemAvatar sx={{width: '100%'}}>
-                <Avatar
-                  variant="square"
-                  src={avatar ? avatar.filename : 'https://placekitten.com/320'}
-                  imgProps={{
-                    alt: `${user.username}'s profile image`,
-                  }}
-                  sx={{width: '100%', height: '30vh'}}
-                />
-              </ListItemAvatar>
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={user.username} />
-            </ListItem>
-            <ListItem>
-              {' '}
-              <ListItemText primary={user.email} />
-            </ListItem>
-            <ListItem>
-              {' '}
-              <ListItemText primary={user.full_name} />
-            </ListItem>
-            <ListItem>
-              {' '}
-              <ListItemText primary={user.user_id} />
-            </ListItem>
-          </List>
-        </CardContent>
-      )}
-    </Card>
+    <Grid container direction="column" alignItems="center" my={3}>
+      <Card sx={{width: '50%'}}>
+        {user && (
+          <CardContent>
+            <List>
+              <ListItem>
+                <ListItemAvatar sx={{width: '100%'}}>
+                  <Avatar
+                    variant="square"
+                    src={
+                      avatar ? avatar.filename : 'https://placekitten.com/320'
+                    }
+                    imgProps={{
+                      alt: `${user.username}'s profile image`,
+                    }}
+                    sx={{width: '100%', height: '30vh'}}
+                  />
+                </ListItemAvatar>
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={'Username: ' + user.username} />
+              </ListItem>
+              <ListItem>
+                {' '}
+                <ListItemText primary={'Email: ' + user.email} />
+              </ListItem>
+              <ListItem>
+                {' '}
+                <ListItemText primary={'Full name: ' + user.full_name} />
+              </ListItem>
+              <ListItem>
+                {' '}
+                <ListItemText primary={'User id: ' + user.user_id} />
+              </ListItem>
+            </List>
+          </CardContent>
+        )}
+      </Card>
+    </Grid>
   );
 };
 

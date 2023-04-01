@@ -12,7 +12,7 @@ import {
 import {useContext, useEffect} from 'react';
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
-import {useUser} from '../hooks/apiHooks';
+import {useUser} from '../hooks/ApiHooks';
 import {themeOptions} from '../theme/themeOptions';
 
 const Layout = () => {
@@ -24,7 +24,6 @@ const Layout = () => {
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
-      console.log(userToken);
       const userData = await getUserByToken(userToken);
       if (userData) {
         setUser(userData);
@@ -55,7 +54,7 @@ const Layout = () => {
                 letterSpacing: '.3rem',
               }}
             >
-              FIRMA
+              Media Sharing App
             </Typography>
             <Box sx={{mr: 2}}>
               <Button sx={{color: 'white'}} component={Link} to="/home">

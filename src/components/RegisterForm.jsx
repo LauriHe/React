@@ -1,39 +1,50 @@
 import useForm from '../hooks/FormHooks';
+import PropTypes from 'prop-types';
 import {useUser} from '../hooks/ApiHooks';
 import {Button} from '@mui/material';
 import {Container} from '@mui/system';
 import {TextValidator, ValidatorForm} from 'react-material-ui-form-validator';
 import {registerForm} from '../utils/errorMessages';
-import {registerValidator} from '../utils/validators';
+import {registerValidators} from '../utils/validators';
+import {useEffect} from 'react';
 
-const RegisterForm = (props) => {
+const RegisterForm = ({toggle}) => {
   const {postUser, getCheckUser} = useUser();
 
   const initValues = {
     username: '',
     password: '',
+    confirm: '',
     email: '',
     full_name: '',
   };
 
   const doRegister = async () => {
     try {
-      const userResult = await postUser(inputs);
+      const inputsWithoutConfirm = {...inputs};
+      delete inputsWithoutConfirm.confirm;
+      const userResult = await postUser(inputsWithoutConfirm);
       alert(userResult.message);
+      toggle();
     } catch (error) {
       alert(error.message);
     }
-  };
-
-  const handleUsername = async () => {
-    const {available} = await getCheckUser(inputs.username);
-    available || alert('Username not available');
   };
 
   const {inputs, handleSubmit, handleInputChange} = useForm(
     doRegister,
     initValues
   );
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule(
+      'isPasswordMatch',
+      (value) => value === inputs.password
+    );
+    ValidatorForm.addValidationRule('isUsernameAvailable', async (value) => {
+      return await getCheckUser(inputs.username);
+    });
+  }, [inputs]);
 
   return (
     <Container maxWidth="xs">
@@ -45,7 +56,8 @@ const RegisterForm = (props) => {
           label="Username"
           onChange={handleInputChange}
           value={inputs.username}
-          onBlur={handleUsername}
+          validators={registerValidators.username}
+          errorMessages={registerForm.username}
         />
         <TextValidator
           fullWidth
@@ -55,6 +67,19 @@ const RegisterForm = (props) => {
           label="Password"
           onChange={handleInputChange}
           value={inputs.password}
+          validators={registerValidators.password}
+          errorMessages={registerForm.password}
+        />
+        <TextValidator
+          fullWidth
+          margin="dense"
+          name="confirm"
+          type="password"
+          label="Confirm password"
+          onChange={handleInputChange}
+          value={inputs.confirm}
+          validators={registerValidators.confirm}
+          errorMessages={registerForm.confirm}
         />
         <TextValidator
           fullWidth
@@ -64,7 +89,7 @@ const RegisterForm = (props) => {
           label="Email"
           onChange={handleInputChange}
           value={inputs.email}
-          validators={registerValidator.email}
+          validators={registerValidators.email}
           errorMessages={registerForm.email}
         />
         <TextValidator
@@ -74,6 +99,8 @@ const RegisterForm = (props) => {
           label="Full name"
           onChange={handleInputChange}
           value={inputs.full_name}
+          validators={registerValidators.full_name}
+          errorMessages={registerForm.full_name}
         />
         <Button fullWidth sx={{mt: 1}} variant="contained" type="submit">
           Register
@@ -83,6 +110,8 @@ const RegisterForm = (props) => {
   );
 };
 
-RegisterForm.propTypes = {};
+RegisterForm.propTypes = {
+  toggle: PropTypes.func,
+};
 
 export default RegisterForm;

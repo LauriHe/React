@@ -24,7 +24,6 @@ const Layout = () => {
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
-      console.log(userToken);
       const userData = await getUserByToken(userToken);
       if (userData) {
         setUser(userData);
@@ -65,6 +64,9 @@ const Layout = () => {
                 <>
                   <Button sx={{color: 'white'}} component={Link} to="/profile">
                     Profile
+                  </Button>
+                  <Button sx={{color: 'white'}} component={Link} to="/upload">
+                    Upload
                   </Button>
                   <Button sx={{color: 'white'}} component={Link} to="/logout">
                     Logout

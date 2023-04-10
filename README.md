@@ -1,3 +1,3 @@
-# Week 3: mui
+# Week 4: upload
 
-Open [https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week3/mui/](https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week3/mui/) to view it in the browser.
+Open [https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week4/upload/](https://users.metropolia.fi/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week4/upload/) to view it in the browser.

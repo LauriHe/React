@@ -24,6 +24,7 @@ const Layout = () => {
   const getUserInfo = async () => {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
+      console.log(userToken);
       const userData = await getUserByToken(userToken);
       if (userData) {
         setUser(userData);
@@ -54,7 +55,7 @@ const Layout = () => {
                 letterSpacing: '.3rem',
               }}
             >
-              Media Sharing App
+              FIRMA
             </Typography>
             <Box sx={{mr: 2}}>
               <Button sx={{color: 'white'}} component={Link} to="/home">

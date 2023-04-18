@@ -5,7 +5,7 @@ import {MediaContext} from '../contexts/MediaContext';
 import {useAuthentication} from '../hooks/ApiHooks';
 import useForm from '../hooks/FormHooks';
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const {setUser} = useContext(MediaContext);
   const {postLogin} = useAuthentication();
   const navigate = useNavigate();
@@ -58,7 +58,5 @@ const LoginForm = (props) => {
     </Container>
   );
 };
-
-LoginForm.propTypes = {};
 
 export default LoginForm;

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week4/upload/",
+    "build": "vite build --base=/~lauhei/Mediapalvelut-ja-kayttajakokemus/React/Week5/player/",
     "preview": "vite preview"
   },
   "dependencies": {

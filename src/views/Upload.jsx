@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {appId} from '../utils/variables';
 import {useMedia, useTag} from '../hooks/ApiHooks';
 
-const Upload = (props) => {
+const Upload = () => {
   const [file, setFile] = useState(null);
   const [selectedImage, setSelectedImage] = useState(
     'https://placekitten.com/600/400'
@@ -151,7 +151,5 @@ const Upload = (props) => {
     </Box>
   );
 };
-
-Upload.propTypes = {};
 
 export default Upload;

@@ -3,7 +3,7 @@ import {useState} from 'react';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 
-const Login = (props) => {
+const Login = () => {
   const [formToggle, setFormToggle] = useState(true);
   const toggle = () => {
     setFormToggle(!formToggle);
@@ -15,7 +15,9 @@ const Login = (props) => {
           {formToggle ? 'Login' : 'Register'}
         </Typography>
       </Grid>
-      <Grid item>{formToggle ? <LoginForm /> : <RegisterForm />}</Grid>
+      <Grid item>
+        {formToggle ? <LoginForm /> : <RegisterForm toggle={toggle} />}
+      </Grid>
       <Grid item>
         <Typography variant="body2" sx={{mt: 2}}>
           {formToggle ? 'First time here?' : 'Already registered?'}
@@ -27,7 +29,5 @@ const Login = (props) => {
     </Grid>
   );
 };
-
-Login.propTypes = {};
 
 export default Login;
